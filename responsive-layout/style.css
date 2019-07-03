@@ -19,10 +19,11 @@
 
 
 
-  p:hover, h1:hover, h2:hover {
+  /** p:hover, h1:hover, h2:hover {
     font-family: "Comic Sans MS", cursive, sans-serif;
     color: red;
   }
+  */
   
   p {
     font-family: helvetica;
