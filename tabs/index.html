@@ -10,7 +10,7 @@
 <body>
 
   <div class="tab">
-    <button class="tablinks" onclick="openTab(event, 'users');fetchUsers(usersAPI);printUsers()">Users</button>
+    <button class="tablinks" onclick="openTab(event, 'users')">Users</button>
     <button class="tablinks" onclick="openTab(event, 'comments')">Comments</button>
     <button class="tablinks" onclick="openTab(event, 'posts')">Posts</button>
   </div>
@@ -25,20 +25,20 @@
   </div>
 
   <script>
+    //global array for holding data from fetch operations
+    var data = [];
 
-    /**
-     * global vars
-     */ 
-
-    var users = [];
-    var posts = [];
-    var comments = [];
-
+    //various apis for each tab
     var usersAPI = "https://jsonplaceholder.typicode.com/users"
     var postsAPI = 'https://jsonplaceholder.typicode.com/posts'
     var commentsAPI = 'https://jsonplaceholder.typicode.com/comments'
 
+    /** 
+     * This function opens the individual tabs
+     * @params event, tabName
+     */
     function openTab(evt, tabName) {
+      //display the tab contents
       var i, tabcontent, tablinks;
       tabcontent = document.getElementsByClassName("tabcontent");
       for (i = 0; i < tabcontent.length; i++) {
@@ -50,9 +50,41 @@
       }
       document.getElementById(tabName).style.display = "block";
       evt.currentTarget.className += " active";
+
+      console.log("tabName is " + tabName);
+
+      //swtich statement fetches & prints data to tab
+      switch (tabName) {
+        //print a user for each value in the data array
+        case "users":
+          console.log("fetching users");
+          fetchData(usersAPI);
+          printData(usersAPI);
+          break;
+        //print a comment for each value
+        case "comments":
+          console.log("fetching comments");
+          fetchData(commentsAPI);
+          printData(commentsAPI);
+          break;
+        //print a post for each post in data array
+        case "posts":
+          console.log("fetching posts");
+          fetchData(postsAPI);
+          printData(postsAPI);
+          break;
+        //print error if input not already defined
+        default:
+          console.log("ERROR!");
+      }
     }
 
-    function fetchUsers(api) {
+    /**
+     * This function fetches the data from the api
+     * @params api
+     */
+    function fetchData(api) {
+      //clear data "cache"
       //Create the XHR Object
       let xhr = new XMLHttpRequest;
       //Call the open function, GET-type of request, url, true-asynchronous
@@ -63,32 +95,63 @@
         if (this.status === 200) {
           //return server response as an object with JSON.parse
           //console.log(JSON.parse(this.responseText));
-          users = JSON.parse(this.responseText);
+          data = JSON.parse(this.responseText);
         }
       }
       //call send
       xhr.send();
     }
 
-    function printUsers() {
+    /**
+     * this function prints the data to the tab depending on the api
+     * @params api
+     */
+    function printData(api) {
+      //present data depending on which api is associated with a tab
+      switch (api) {
+        case usersAPI:
+          //print a user for each value in the data array
+          data.forEach(e => {
+            var paragraph = document.createElement("p");
+            var linebreak = document.createElement("br");
+            //add id
+            var node = document.createTextNode("EMAIL: " + e.email);
+            paragraph.appendChild(node);
+            //add linmebreak
+            paragraph.appendChild(linebreak)
+            //add name
+            var node = document.createTextNode("NAME: " + e.name);
+            paragraph.appendChild(node);
+            var element = document.getElementById("users");
+            element.appendChild(paragraph);
+          });
+          break;
+        case commentsAPI:
+          //print the comments
+          data.forEach(e => {
 
-      users.forEach(e => {
+            var paragraph = document.createElement("p");
+            var linebreak = document.createElement("br");
+            //add id
+            var node = document.createTextNode("TITLE: " + e.id);
+            paragraph.appendChild(node);
+            //add linmebreak
+            paragraph.appendChild(linebreak)
+            //add name
+            var node = document.createTextNode("COMMENT: " + e.name);
+            paragraph.appendChild(node);
+            var element = document.getElementById("users");
+            element.appendChild(paragraph);
+          });
+          break;
+        case postsAPI:
+          //print the comments
+          console.log(data);
+          break;
+        default:
+          console.log("ERROR!");
+      }
 
-        var paragraph = document.createElement("p");
-        var linebreak = document.createElement("br");
-        //add id
-        var node = document.createTextNode("EMAIL: " + e.email);
-        paragraph.appendChild(node);
-        //add linmebreak
-        paragraph.appendChild(linebreak)
-        //add name
-        var node = document.createTextNode("NAME: " + e.name);
-        paragraph.appendChild(node);
-
-        var element = document.getElementById("users");
-        element.appendChild(paragraph);
-
-      });
     }
 
   </script>
