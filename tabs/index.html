@@ -39,11 +39,15 @@
      */
     function openTab(evt, tabName) {
       //display the tab contents
+
+      //declare i tabtontent and links
       var i, tabcontent, tablinks;
       tabcontent = document.getElementsByClassName("tabcontent");
+      //for each tab in tacbcontent
       for (i = 0; i < tabcontent.length; i++) {
         tabcontent[i].style.display = "none";
       }
+      //replace active tab
       tablinks = document.getElementsByClassName("tablinks");
       for (i = 0; i < tablinks.length; i++) {
         tablinks[i].className = tablinks[i].className.replace(" active", "");
@@ -51,7 +55,7 @@
       document.getElementById(tabName).style.display = "block";
       evt.currentTarget.className += " active";
 
-      console.log("tabName is " + tabName);
+      console.log("current " + tabName);
 
       //swtich statement fetches & prints data to tab
       switch (tabName) {
@@ -59,19 +63,16 @@
         case "users":
           console.log("fetching users");
           fetchData(usersAPI);
-          printData(usersAPI);
           break;
         //print a comment for each value
         case "comments":
           console.log("fetching comments");
           fetchData(commentsAPI);
-          printData(commentsAPI);
           break;
         //print a post for each post in data array
         case "posts":
           console.log("fetching posts");
           fetchData(postsAPI);
-          printData(postsAPI);
           break;
         //print error if input not already defined
         default:
@@ -79,10 +80,22 @@
       }
     }
 
+    function fetchData(api) {
+      fetch(api)
+        .then(response => response.json())
+        .then(json => data = json)
+
+      printData(api);
+
+      //clear data
+      data = [];
+      console.log("deleting...");
+    }
+
     /**
      * This function fetches the data from the api
      * @params api
-     */
+     
     function fetchData(api) {
       //clear data "cache"
       //Create the XHR Object
@@ -100,8 +113,16 @@
       }
       //call send
       xhr.send();
-    }
 
+      //print to tab
+      printData(api);
+
+      //clear data
+      data = [];
+
+
+    }
+    */
     /**
      * this function prints the data to the tab depending on the api
      * @params api
@@ -126,7 +147,10 @@
             element.appendChild(paragraph);
           });
           break;
+
         case commentsAPI:
+          console.log("comment data: ")
+          console.log(data);
           //print the comments
           data.forEach(e => {
 
@@ -140,7 +164,7 @@
             //add name
             var node = document.createTextNode("COMMENT: " + e.name);
             paragraph.appendChild(node);
-            var element = document.getElementById("users");
+            var element = document.getElementById("comments");
             element.appendChild(paragraph);
           });
           break;
