@@ -80,6 +80,10 @@
       }
     }
 
+    /**
+     * function to query data from the API
+     * @params api
+     */
     function fetchData(api) {
       fetch(api)
         .then(response => response.json())
@@ -93,7 +97,7 @@
     }
 
     /**
-     * This function fetches the data from the api
+     * old ajax query
      * @params api
      
     function fetchData(api) {
@@ -153,7 +157,6 @@
           console.log(data);
           //print the comments
           data.forEach(e => {
-
             var paragraph = document.createElement("p");
             var linebreak = document.createElement("br");
             //add id
@@ -162,7 +165,7 @@
             //add linmebreak
             paragraph.appendChild(linebreak)
             //add name
-            var node = document.createTextNode("COMMENT: " + e.name);
+            var node = document.createTextNode("COMMENT: " + e.body);
             paragraph.appendChild(node);
             var element = document.getElementById("comments");
             element.appendChild(paragraph);
