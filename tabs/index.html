@@ -137,7 +137,9 @@
         case usersAPI:
           //print a user for each value in the data array
           data.forEach(e => {
-            var paragraph = document.createElement("p");
+            var paragraph = document.createElement("div");
+            paragraph.setAttribute("class", "databox");
+
             var linebreak = document.createElement("br");
             //add id
             var node = document.createTextNode("EMAIL: " + e.email);
@@ -157,10 +159,11 @@
           console.log(data);
           //print the comments
           data.forEach(e => {
-            var paragraph = document.createElement("p");
+            var paragraph = document.createElement("div");
+            paragraph.setAttribute("class", "databox");
             var linebreak = document.createElement("br");
             //add id
-            var node = document.createTextNode("TITLE: " + e.id);
+            var node = document.createTextNode("COMMENT ID: " + e.id);
             paragraph.appendChild(node);
             //add linmebreak
             paragraph.appendChild(linebreak)
@@ -174,7 +177,8 @@
         case postsAPI:
           //print the comments
           data.forEach(e => {
-            var paragraph = document.createElement("p");
+            var paragraph = document.createElement("div");
+            paragraph.setAttribute("class", "databox");
             var linebreak = document.createElement("br");
             //add title
             var node = document.createTextNode("TITLE: " + e.title);

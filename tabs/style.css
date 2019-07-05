@@ -7,6 +7,16 @@ body {font-family: Arial;}
   background-color: #0099cc;
 }
 
+.databox {
+  color: yellow;
+  background-color: purple;
+  border: black;
+  border-style: double;
+  margin: 4px;
+  overflow: hidden;
+  text-overflow:ellipsis;
+}
+
 /* Style the buttons inside the tab */
 .tab button {
   background-color: inherit;
