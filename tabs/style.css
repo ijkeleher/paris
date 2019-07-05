@@ -9,6 +9,16 @@ margin: 0%;
   background-color: #0099cc;
 }
 
+.databox {
+  color: yellow;
+  background-color: purple;
+  border: black;
+  border-style: double;
+  margin: 4px;
+  overflow: hidden;
+  text-overflow:ellipsis;
+}
+
 /* Style the buttons inside the tab */
 .tab button {
   background-color: inherit;
@@ -36,8 +46,8 @@ margin: 0%;
 
 /* Style the tab content */
 .tabcontent {
-    color: white;
-background-color: #00cccc;
+  color: white;
+  background-color: #00cccc;
   display: none;
   padding: 6px 12px;
   border: 1px solid #ccc;
@@ -45,6 +55,5 @@ background-color: #00cccc;
 }
 
 .p {
-  white-space: pre;
-  
+  white-space: pre; 
 }
