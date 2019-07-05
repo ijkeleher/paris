@@ -170,6 +170,20 @@
           break;
         case postsAPI:
           //print the comments
+          data.forEach(e => {
+            var paragraph = document.createElement("p");
+            var linebreak = document.createElement("br");
+            //add title
+            var node = document.createTextNode("TITLE: " + e.title);
+            paragraph.appendChild(node);
+            //add linebreak
+            paragraph.appendChild(linebreak)
+            //add body
+            var node = document.createTextNode("POST: " + e.body);
+            paragraph.appendChild(node);
+            var element = document.getElementById("posts");
+            element.appendChild(paragraph);
+          });
           console.log(data);
           break;
         default:
