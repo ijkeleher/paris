@@ -1,4 +1,6 @@
-body {font-family: Arial;}
+body {font-family: Arial;
+margin: 0%;
+}
 
 /* Style the tab */
 .tab {
@@ -10,9 +12,10 @@ body {font-family: Arial;}
 /* Style the buttons inside the tab */
 .tab button {
   background-color: inherit;
-  float: left;
-  border: none;
-  outline: none;
+  float: center;
+  border-radius: 20px;
+  border-color: green;
+  outline-color: green;
   cursor: pointer;
   padding: 14px 16px;
   transition: 0.3s;
