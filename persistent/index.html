@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body onload="loadData()">
+
+  <div class="header">
+    <h1>RMIT Math Society</h1>
+  </div>
+
+  <div class="row">
+    <div class="col-3 col-s-3 menu">
+      <form name="commentform" action="" method="POST" class="form">
+        <h2>Sign Guestbook</h2>
+        Name:<br>
+        <input type="text" id="name" name="name" value=""><br>
+        Email:<br>
+        <input type="email" id="email" name="email" value=""><br>
+        <label for="subject">Comment</label>
+        <br>
+        <textarea id="comment" name="comment" placeholder="Write something.." style="height:200px"></textarea>
+        <br>
+        <input type="button" value="Submit" class="button" onclick="changeText();loadData()">
+      </form>
+    </div>
+
+    <div class="col-6 col-s-9">
+      <div class="info">
+        <h2>Welcome to the MASS website!</h2>
+        <p>
+          RMIT Mathematics and Statistics Society (MASS) is here to support maths students and promote mathematical
+          interest and learning through a broad range of events and activities. Membership is free, as are all of our
+          events!
+
+          Our events include: the University Maths Olympics, Puzzle Hunt, trivia nights, BBQs, board game nights,
+          picnics, seminars, first year study groups and much more!
+
+          We also have a club room, located down the corridor opposite the Peter Hall General Office. All maths students
+          are welcome to come and hang out there, play board games, use the whiteboards, or just nap on the sofas.
+
+          To find out more, like us on Facebook or send us an email: mass@clubs.rmit.edu.au
+        </p>
+        <h3>Club Aims:</h3>
+        <ul>
+          <li>To have lectures, papers and discussions on mathematical and statistical subjects of such a nature as to
+            interest and benefit students of the University.</li>
+          <br />
+          <li>To further the interest of students in mathematics and statistics by any other suitable means, and to
+            interest itself in matters relating to students of mathematics and statistics in the University.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-3 col-s-12">
+      <div class="aside" id="change">
+        <h2>Guest Comments</h2>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <h2>Resize the Browser to Test Layouts</h2>
+  </div>
+
+  <script>
+    //comments array for storing comments
+    var comments = [];
+
+    /**
+     * this function loads comments into the guestbook
+     */
+    function loadData() {
+      var result = JSON.parse(localStorage.getItem("comments"));
+
+      //go through the array and print out new comments
+      console.log(result);
+      result.forEach(e => {
+        var para = document.createElement("p");
+        var node = document.createTextNode("Name: " + e.name + "\n Email: " + e.email + "\n Comment: " + e.comment + "\n");
+        para.appendChild(node);
+        var element = document.getElementById("change");
+        element.appendChild(para);
+      });
+
+    }
+
+    /**
+    This function changes the text in the Comment box, adding the latest comment
+    */
+    function changeText() {
+      //clear old comments
+      comments = [];
+
+      //grab data from form and create comment object
+      var c = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        comment: document.getElementById('comment').value
+      };
+
+      comments.push(c);
+
+      //store comment for retrieval
+      localStorage.setItem("comments", JSON.stringify(comments));
+    }
+  </script>
+
+</body>
+
+</html>
