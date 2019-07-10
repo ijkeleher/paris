@@ -1,0 +1,9 @@
+[
+    {
+        "favicon" : "null",
+        "author" : "Isaac Keleher",
+        "background-colour" : "#967BB6",
+        "start-url" : "http://localhost:8000/about"
+
+    }
+]
