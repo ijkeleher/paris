@@ -17,7 +17,6 @@ class Comment extends Component {
     ]
     };
     this.submitComment = this.submitComment.bind(this);
-
     this.handlechange = this.handlechange.bind(this);
 
   }
