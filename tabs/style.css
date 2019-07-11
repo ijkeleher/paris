@@ -17,6 +17,8 @@ margin: 0%;
   margin: 4px;
   overflow: hidden;
   text-overflow:ellipsis;
+  margin-left: 100px;
+  margin-right: 100gpx;
 }
 
 /* Style the buttons inside the tab */
